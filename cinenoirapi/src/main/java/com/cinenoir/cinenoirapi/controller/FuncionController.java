@@ -1,12 +1,11 @@
 package com.cinenoir.cinenoirapi.controller;
 
+import com.cinenoir.cinenoirapi.dto.FuncionRequest;
 import com.cinenoir.cinenoirapi.model.Funcion;
 import com.cinenoir.cinenoirapi.service.FuncionService;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -34,9 +33,20 @@ public class FuncionController {
     }
 
     // Crear funcion
+
     @PostMapping
     public ResponseEntity<Funcion> guardar(
-            @RequestBody Funcion funcion) {
+            @RequestBody FuncionRequest request) {
+
+        Funcion funcion = new Funcion(
+                null,
+                request.idPelicula(),
+                request.fecha(),
+                request.hora(),
+                request.sala(),
+                request.precio(),
+                request.cuposDisponibles()
+        );
 
         int id = service.guardar(funcion);
 
@@ -48,12 +58,23 @@ public class FuncionController {
     @PutMapping("/{id}")
     public ResponseEntity<Funcion> actualizar(
             @PathVariable int id,
-            @RequestBody Funcion funcion) {
+            @RequestBody FuncionRequest request) {
+
+        Funcion funcion = new Funcion(
+                id,
+                request.idPelicula(),
+                request.fecha(),
+                request.hora(),
+                request.sala(),
+                request.precio(),
+                request.cuposDisponibles()
+        );
 
         service.actualizar(id, funcion);
 
         return ResponseEntity.ok(service.buscarPorId(id));
     }
+
 
     // Eliminar funcion
     @DeleteMapping("/{id}")

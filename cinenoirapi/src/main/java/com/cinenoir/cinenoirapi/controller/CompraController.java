@@ -3,13 +3,11 @@ package com.cinenoir.cinenoirapi.controller;
 import com.cinenoir.cinenoirapi.dto.CompraRequest;
 import com.cinenoir.cinenoirapi.model.Compra;
 import com.cinenoir.cinenoirapi.service.CompraService;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDate;
 import java.util.List;
 
